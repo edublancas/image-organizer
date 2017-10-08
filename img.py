@@ -54,6 +54,3 @@ for file, media_type in get_image_type(files):
     folder = folders[media_type]
     os.rename(file,
               os.path.join(folder, file))
-
-# https://sno.phy.queensu.ca/~phil/exiftool/
-# https://github.com/smarnach/pyexiftool

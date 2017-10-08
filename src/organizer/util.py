@@ -1,15 +1,10 @@
 import exiftool
 
-from os import listdir
-from os.path import isfile, join
-
-import os
-
 
 class MediaType(object):
     Screenshot = 'screenshot'
     Picture = 'picture'
-    Image = 'generic'
+    Image = 'image'
     Video = 'video'
     Unknown = 'unknown'
 
@@ -17,7 +12,7 @@ class MediaType(object):
 folders = {MediaType.Screenshot: 'Screenshots',
            MediaType.Picture: 'Pictures',
            MediaType.Image: 'Generic',
-           MediaType.Video: 'Pictures',
+           MediaType.Video: 'Videos',
            MediaType.Unknown: 'Unknown'}
 
 
@@ -34,23 +29,9 @@ def _get_single_image_type(metadata):
         return (metadata['SourceFile'], MediaType.Unknown)
 
 
-def get_image_type(filenames):
+def get_image_type(files):
     with exiftool.ExifTool() as et:
-        metadata = et.get_metadata_batch(filenames)
+        metadata = et.get_metadata_batch(files)
         types = [_get_single_image_type(m) for m in metadata]
 
     return types
-
-
-files = [f for f in listdir('.')
-         if isfile(join('.', f)) and not f.startswith('.')]
-
-
-for folder in folders.values():
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-
-for file, media_type in get_image_type(files):
-    folder = folders[media_type]
-    os.rename(file,
-              os.path.join(folder, file))

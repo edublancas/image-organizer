@@ -46,7 +46,7 @@ files = [f for f in listdir('.')
          if isfile(join('.', f)) and not f.startswith('.')]
 
 
-for folder in folders:
+for folder in folders.values():
     if not os.path.exists(folder):
         os.makedirs(folder)
 

@@ -15,14 +15,15 @@ def main():
 
     args = parser.parse_args()
 
-    files = [f for f in listdir(args.source)
-             if isfile(join(args.source, f)) and not f.startswith(args.source)]
+    files = [os.path.join(args.source, f) for f in listdir(args.source)
+             if isfile(join(args.source, f)) and not f.startswith('.')]
 
     for folder in folders.values():
-        if not os.path.exists(folder):
-            os.makedirs(folder)
+        path_to_folder = os.path.join(args.destiny, folder)
+        if not os.path.exists(path_to_folder):
+            os.makedirs(path_to_folder)
 
     for file, media_type in get_image_type(files):
         folder = folders[media_type]
-        os.rename(os.path.join(args.source, file),
-                  os.path.join(args.destiny, folder, file))
+        os.rename(file,
+                  os.path.join(args.destiny, folder, os.path.basename(file)))

@@ -1,8 +1,7 @@
 import pytest
 from shutil import copyfile, rmtree
-from os import listdir
-from os.path import isfile, join
-import os
+from os import listdir, makedirs
+from os.path import isfile, join, dirname, realpath, exists
 import sys
 import glob
 
@@ -11,31 +10,28 @@ from organizer.command_line import main
 
 @pytest.fixture
 def sample_input():
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                        'sample_input')
+    return join(dirname(realpath(__file__)), 'sample_input')
 
 
 @pytest.fixture
 def sample_output():
-    return os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                        'sample_output')
+    return join(dirname(realpath(__file__)), 'sample_output')
 
 
 def test_files_are_organized_correctly(sample_input, sample_output):
-    sample_media = os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                                'sample_media')
-    if not os.path.exists(sample_output):
-        os.makedirs(sample_output)
+    sample_media = join(dirname(realpath(__file__)), 'sample_media')
+    if not exists(sample_output):
+        makedirs(sample_output)
 
-    if not os.path.exists(sample_input):
-        os.makedirs(sample_input)
+    if not exists(sample_input):
+        makedirs(sample_input)
 
     # make a copy of the sample media files
     files = [f for f in listdir(sample_media)
              if isfile(join(sample_media, f)) and not f.startswith('.')]
 
     for f in files:
-        copyfile(os.path.join(sample_media, f), join(sample_input, f))
+        copyfile(join(sample_media, f), join(sample_input, f))
 
     sys.argv = ['organizer', sample_input, sample_output]
     main()

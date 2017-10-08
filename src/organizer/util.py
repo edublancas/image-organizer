@@ -21,9 +21,11 @@ def _get_single_image_type(metadata):
         return (metadata['SourceFile'], MediaType.Screenshot)
     elif metadata.get('EXIF:Model'):
         return (metadata['SourceFile'], MediaType.Picture)
-    elif 'image' in metadata['File:MIMEType']:
+    elif (metadata.get('File:MIMEType') and
+          'image' in metadata.get('File:MIMEType')):
         return (metadata['SourceFile'], MediaType.Image)
-    elif 'video' in metadata['File:MIMEType']:
+    elif (metadata.get('File:MIMEType') and
+          'video' in metadata.get('File:MIMEType')):
         return (metadata['SourceFile'], MediaType.Video)
     else:
         return (metadata['SourceFile'], MediaType.Unknown)

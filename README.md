@@ -7,3 +7,8 @@ Python utility for organizing pictures.
 https://sno.phy.queensu.ca/~phil/exiftool/
 https://github.com/smarnach/pyexiftool
 
+## Usage
+
+```shell
+organize SOURCE DESTINATION
+```

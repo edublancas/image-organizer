@@ -7,13 +7,15 @@ class MediaType(object):
     Image = 'image'
     Video = 'video'
     Unknown = 'unknown'
+    GenericVideo = 'generic_video'
 
 
 folders = {MediaType.Screenshot: 'Screenshots',
            MediaType.Picture: 'Pictures',
            MediaType.Image: 'Images',
            MediaType.Video: 'Videos',
-           MediaType.Unknown: 'Unknown'}
+           MediaType.Unknown: 'Unknown',
+           MediaType.GenericVideo: 'GenericVideo'}
 
 
 def _get_single_image_type(metadata):
@@ -29,8 +31,10 @@ def _get_single_image_type(metadata):
 
     elif (metadata.get('File:MIMEType') and
           'video' in metadata.get('File:MIMEType')):
-        return (metadata['SourceFile'], MediaType.Video)
-
+        if metadata.get('QuickTime:Model'):
+            return (metadata['SourceFile'], MediaType.Video)
+        else:
+            return (metadata['SourceFile'], MediaType.GenericVideo)
     else:
         return (metadata['SourceFile'], MediaType.Unknown)
 

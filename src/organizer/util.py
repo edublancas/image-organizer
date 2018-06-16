@@ -3,7 +3,7 @@ import exiftool
 
 class MediaType(object):
     Screenshot = 'screenshot'
-    Picture = 'picture'
+    Photo = 'photo'
     Image = 'image'
     Video = 'video'
     Unknown = 'unknown'
@@ -11,8 +11,8 @@ class MediaType(object):
 
 
 folders = {MediaType.Screenshot: 'Screenshots',
-           MediaType.Picture: 'My Pictures',
-           MediaType.Image: 'Pictures',
+           MediaType.Photo: 'Photos',
+           MediaType.Image: 'Images',
            MediaType.Video: 'My Videos',
            MediaType.Unknown: 'Unknown',
            MediaType.GenericVideo: 'Videos'}
@@ -23,7 +23,7 @@ def _get_single_image_type(metadata):
         return (metadata['SourceFile'], MediaType.Screenshot)
 
     elif metadata.get('EXIF:Model'):
-        return (metadata['SourceFile'], MediaType.Picture)
+        return (metadata['SourceFile'], MediaType.Photo)
 
     elif (metadata.get('File:MIMEType') and
           'image' in metadata.get('File:MIMEType')):

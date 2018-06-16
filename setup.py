@@ -20,8 +20,7 @@ EMAIL = 'e.blancas@columbia.edu'
 AUTHOR = 'Eduardo Blancas'
 LICENSE = 'GPL3'
 
-REQUIRED = [
-]
+REQUIRED = ['tdqm']
 
 here = os.path.abspath(os.path.dirname(__file__))
 

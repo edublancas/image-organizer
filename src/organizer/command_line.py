@@ -3,12 +3,13 @@ Organize images. It takes a folder with images and organizes them in
 Screenshots/, Pictures/ (from camera), Images/, Videos/ or
 Unknown/ depending on the metadata
 """
-
 import argparse
 from os import listdir, makedirs, rename
 from os.path import isfile, join, exists, basename
 
 from .util import folders, get_image_type
+
+from tqdm import tqdm
 
 
 def main():
@@ -31,6 +32,6 @@ def main():
             makedirs(path_to_folder)
 
     # go through every image and place it in the folder they belong
-    for file, media_type in get_image_type(files):
+    for file, media_type in tqdm(get_image_type(files)):
         folder = folders[media_type]
         rename(file, join(args.destiny, folder, basename(file)))

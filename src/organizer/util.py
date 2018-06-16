@@ -11,11 +11,11 @@ class MediaType(object):
 
 
 folders = {MediaType.Screenshot: 'Screenshots',
-           MediaType.Picture: 'Pictures',
-           MediaType.Image: 'Images',
-           MediaType.Video: 'Videos',
+           MediaType.Picture: 'My Pictures',
+           MediaType.Image: 'Pictures',
+           MediaType.Video: 'My Videos',
            MediaType.Unknown: 'Unknown',
-           MediaType.GenericVideo: 'GenericVideo'}
+           MediaType.GenericVideo: 'Videos'}
 
 
 def _get_single_image_type(metadata):

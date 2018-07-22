@@ -6,11 +6,21 @@ from pathlib import Path
 from os import listdir
 from collections import namedtuple
 
+File = namedtuple('File', ['filename', 'extension'])
+
+
+def _make_file(filename):
+    parts = filename.split('.')
+
+    if len(parts) > 1:
+        return File(*parts)
+    else:
+        return File(filename=filename, extension='')
+
 
 def clean_raw_folder(path):
-    File = namedtuple('File', ['filename', 'extension'])
 
-    files = [File(*f.split('.')) for f in listdir(path)]
+    files = [_make_file(f) for f in listdir(path)]
 
     jpg = [f for f in files if f.extension == 'JPG']
     raw = [f for f in files if f.extension == 'ARW']

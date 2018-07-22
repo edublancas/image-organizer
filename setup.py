@@ -20,7 +20,7 @@ EMAIL = 'e.blancas@columbia.edu'
 AUTHOR = 'Eduardo Blancas'
 LICENSE = 'GPL3'
 
-REQUIRED = ['tdqm']
+REQUIRED = ['tqdm', 'click']
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -94,6 +94,6 @@ setup(
     ],
     install_requires=REQUIRED,
     entry_points={
-        'console_scripts': ['organize=organizer.command_line:main'],
+        'console_scripts': ['images=organizer.command_line:cli'],
     },
 )

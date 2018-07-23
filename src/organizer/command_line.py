@@ -1,5 +1,4 @@
-"""
-Organize images. It takes a folder with images and organizes them in
+"""Organize images. It takes a folder with images and organizes them in
 Screenshots/, Pictures/ (from camera), Images/, Videos/ or
 Unknown/ depending on the metadata
 """

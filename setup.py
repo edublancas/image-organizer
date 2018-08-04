@@ -94,6 +94,6 @@ setup(
     ],
     install_requires=REQUIRED,
     entry_points={
-        'console_scripts': ['images=organizer.command_line:cli'],
+        'console_scripts': ['photo-organizer=organizer.command_line:cli'],
     },
 )

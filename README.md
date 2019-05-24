@@ -10,5 +10,7 @@ https://github.com/smarnach/pyexiftool
 ## Usage
 
 ```shell
-organize SOURCE DESTINATION
+photo-organizer --help
+
+photo-organizer clean path_to_raw
 ```
